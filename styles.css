@@ -57,3 +57,14 @@ nav button:hover {
     left: 45%;
     gap: 25px;
 }
+.add-book-form  label {
+    display: flex;
+    justify-content: center;
+}
+.add-book-form div {
+    display: flex;
+    justify-content: end;
+}
+.add-book-form div .stop-add-book {
+    justify-items: end;
+}
