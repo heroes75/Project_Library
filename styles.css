@@ -1,0 +1,59 @@
+* {
+    border: 1px solid red;
+    box-sizing: border-box;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+nav {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+nav span {
+    align-self: center;
+    font-size: 3rem;
+}
+nav button {
+    flex-grow: 0;
+    align-self: center;
+    padding: 10px 15px 10px 15px;
+    border-radius: 15px;
+    background-image: linear-gradient(90deg, yellow, gold, yellow);
+    font-weight: 700;
+    color: black;
+}
+nav button:hover {
+    background-image: linear-gradient(90deg, gold, yellow, gold);
+}
+
+/* style book container */
+
+.book-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 250px));
+    width: 95%;
+    min-height: 75%;
+    margin: auto 16px;
+    align-self: center;
+}
+
+/* style Add message form */
+
+.add-book-form {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 25%;
+    left: 45%;
+    gap: 25px;
+}
