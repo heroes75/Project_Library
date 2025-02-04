@@ -40,26 +40,33 @@ nav button:hover {
 
 .book-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 250px));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-rows: minmax(150px, 250px);
     width: 95%;
     min-height: 75%;
     margin: auto 16px;
     align-self: center;
+    gap: 15px;
 }
 
-/* style Add message form */
+/* style Add book form */
 
-.add-book-form {
+.add-book-form  {
     display: flex;
     flex-direction: column;
     position: fixed;
     top: 25%;
     left: 45%;
     gap: 25px;
+
+}
+
+.add-book-form-hide {
+    display: none;
 }
 .add-book-form  label {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 .add-book-form div {
     display: flex;
@@ -67,4 +74,7 @@ nav button:hover {
 }
 .add-book-form div .stop-add-book {
     justify-items: end;
+}
+.stop-add-book {
+    background-color: inherit;
 }
