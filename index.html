@@ -21,20 +21,20 @@
                 </button>
             </div>
             <label for="name">
-                <span>name</span><input name="name" type="text">
+                <span>name</span><input name="name" id="name" type="text">
             </label>
             <label for="author">
-                <span>Author</span><input name="author" type="text">
+                <span>Author</span><input name="author" id="author" type="text">
             </label>
             <label for="pages"><span>Pages</span>
-                <input name="pages" type="number">
+                <input id="pages" name="pages" type="number">
             </label>
             <label for="read"><span>Read Or Not</span>
-                <input name="read" type="radio">Read
-                <input type="radio" name="read">Not Read
+                <input name="read" id="read" value="true" type="radio" >Read
+                <input type="radio" id="notRead" value="" name="read">Not Read
             </label>
             <label for="add-book">
-                <button class="add-book" name="add-book">ADD</button>
+                <button class="add-book" id="add-book" name="add-book">ADD</button>
             </label>
         </form>
     </div>
