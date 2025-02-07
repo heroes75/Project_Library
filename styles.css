@@ -78,3 +78,13 @@ nav button:hover {
 .stop-add-book {
     background-color: inherit;
 }
+
+.add-book:active {
+    background-color: blue;
+}
+
+/*book card*/
+
+form .delete-book:active {
+    background-color: blue;
+}
