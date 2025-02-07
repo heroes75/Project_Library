@@ -6,6 +6,7 @@ const myLibrary = [
         read: false,
         getBook: function() {
             return `<div class="card">
+            <button id="delete-book" class="delete-book"><iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon></button>
                 <p>${this.name}</p><p>${this.author}</p><p>${this.pages} pages</p><p>${this.read ? "read" : "not read"}</p>
             </div>`
         }
@@ -17,6 +18,7 @@ const myLibrary = [
         read: true,
         getBook: function() {
             return `<div class="card">
+            <button id="delete-book" class="delete-book"><iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon></button>
                 <p>${this.name}</p><p>${this.author}</p><p>${this.pages} pages</p><p>${this.read ? "read" : "not read"}</p>
             </div>`
         }
@@ -28,6 +30,7 @@ const myLibrary = [
         read: true,
         getBook: function() {
             return `<div class="card">
+            <button id="delete-book" class="delete-book"><iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon></button>
                 <p>${this.name}</p><p>${this.author}</p><p>${this.pages} pages</p><p>${this.read ? "read" : "not read"}</p>
             </div>`
         }
@@ -43,6 +46,9 @@ const nameAuthor = document.getElementById("author");
 const namepages = document.getElementById("pages");
 const read = document.getElementById("read");
 const notRead = document.getElementById("notRead");
+displayBook();
+const deleteBook = document.getElementById("delete-book");
+
 
 
 function Book(name, author, pages, booleen) {
@@ -53,10 +59,13 @@ function Book(name, author, pages, booleen) {
     this.getBook = function() {
         console.log("in Book",this.reads, this.author)
         return `<div class="card">
+        <button id="delete-book" class="delete-book"><iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon></button>
             <p>${this.name}</p><p>${this.author}</p><p>${this.pages} pages</p><p>${(this.reads ? "reads" : "not read")}</p>
         </div>`
     }
 }
+
+
 
 function addBookToLibrary(name, author, pages, booleen) {
     myLibrary.push(new Book(name, author, pages, booleen));
@@ -76,12 +85,18 @@ addBook.addEventListener("click", (e) => {
     const name = nameBook.value;
     const author = nameAuthor.value;
     const pages = namepages.value;
-    const booleen = read.checked === true ? read.value : notRead.value;
+    const booleen = read.checked == true ? read.value : notRead.value;
     console.log("bool ",booleen);
     console.log(notRead.value);
     addBookToLibrary(name, author, pages, booleen);
-    console.log(myLibrary);
+    //console.log(myLibrary);
+    console.log(deleteBook.target);
     displayBook()
 })
-console.log("out scope", myLibrary)
-displayBook()
+
+deleteBook.addEventListener("click", (e) => {
+    deleteBook.innerHTML = "wedadas"
+    e.preventDefault();
+})
+displayBook();
+
