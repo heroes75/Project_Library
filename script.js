@@ -46,8 +46,7 @@ const nameAuthor = document.getElementById("author");
 const namepages = document.getElementById("pages");
 const read = document.getElementById("read");
 const notRead = document.getElementById("notRead");
-displayBook();
-const deleteBook = document.getElementById("delete-book");
+//const deleteBook = document.querySelectorAll(".delete-book");
 
 
 
@@ -65,16 +64,41 @@ function Book(name, author, pages, booleen) {
     }
 }
 
+/*deleteBook.forEach(button => {
+    button.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.target.style.backgroundColor = "red";
+        console.log(button.id)
+    })
+});*/
 
+//console.log(deleteBook[1].id);
 
 function addBookToLibrary(name, author, pages, booleen) {
     myLibrary.push(new Book(name, author, pages, booleen));
 } 
 
 function displayBook() {
-    const bookInformation = myLibrary.map(el => el.getBook()).join("");
-    bookContainer.innerHTML = bookInformation;
-    
+    //const bookInformation = myLibrary.map(el => el.getBook()).join("");
+    //bookContainer.innerHTML = bookInformation;
+    bookContainer.textContent = ""
+    myLibrary.forEach(element => {
+        const card = document.createElement("div");
+        const deleteButton = document.createElement("button")
+        card.appendChild(deleteButton);
+        deleteButton.setAttribute("id", "delete-book");
+        deleteButton.innerHTML = '<button id="delete-book" class="delete-book"><iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon></button>'
+        card.classList.add("card");
+        bookContainer.appendChild(card);
+        const p1 = document.createElement("p");
+        card.appendChild(p1);
+        p1.textContent = element.getBook();
+        deleteButton.onclick = (e) => {
+            e.preventDefault();
+            e.target.style.backgroundColor = "red";
+            console.log(e.target)
+        }
+    });
 }
 addButton.addEventListener("click", (e) => {
     e.preventDefault();
@@ -90,13 +114,11 @@ addBook.addEventListener("click", (e) => {
     console.log(notRead.value);
     addBookToLibrary(name, author, pages, booleen);
     //console.log(myLibrary);
-    console.log(deleteBook.target);
+    e.target.style.backgroundColor = "red"
     displayBook()
+
 })
 
-deleteBook.addEventListener("click", (e) => {
-    deleteBook.innerHTML = "wedadas"
-    e.preventDefault();
-})
 displayBook();
+
 
