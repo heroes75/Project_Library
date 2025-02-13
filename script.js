@@ -119,7 +119,11 @@ function displayBook() {
             myLibrary.splice(i, 1);
             displayBook();
         }
-        buttonToggle.onclick = element.toggleRead();
+        buttonToggle.onclick = function name() {
+            element.toggleRead();
+            buttonToggle.textContent = element.reads ? "read" : "not Read";
+            buttonToggle.style.backgroundColor = element.reads ? "green" : "red";
+        } 
     });
 }
 addButton.addEventListener("click", (e) => {
