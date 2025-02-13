@@ -15,14 +15,14 @@ const myLibrary = [
         }
     },
     {
-        name: "Monte Christo",
+        name: "Conte Monte Christo",
         author: "Alexandre Dumas",
         pages: 135,
         reads: true,
         getBook: function() {
             return `<div class="card">
             <button id="delete-book" class="delete-book"><iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon></button>
-                <p>${this.name}</p><p>${this.author}</p><p>${this.pages} pages</p><p>${this.read ? "read" : "not read"}</p>
+                <p>${this.name}</p><p>${this.author}</p><p>${this.pages} pages</p><p>${this.reads ? "read" : "not read"}</p>
             </div>`
         },
         toggleRead: function() {
@@ -56,7 +56,9 @@ const namepages = document.getElementById("pages");
 const read = document.getElementById("read");
 const notRead = document.getElementById("notRead");
 //const deleteBook = document.querySelectorAll(".delete-book");
-
+const favDialog = document.getElementById("favDialog");
+const confirmBtn = favDialog.querySelector("#confirmBtn");
+const stopAddBook =  document.getElementById("stop-add-book");
 
 
 function Book(name, author, pages, booleen) {
@@ -78,15 +80,14 @@ Book.prototype.toggleRead = function() {
     
 }
 
-/*deleteBook.forEach(button => {
-    button.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.target.style.backgroundColor = "red";
-        console.log(button.id)
-    })
-});*/
-
-//console.log(deleteBook[1].id);
+const resetFunction = () => {
+    nameBook.value = "";
+    nameAuthor.value = "";
+    namepages.value = "";
+    nameAuthor.value = "";
+    read.checked = false;
+    notRead.checked = false;
+}
 
 function addBookToLibrary(name, author, pages, booleen) {
     myLibrary.push(new Book(name, author, pages, booleen));
@@ -115,10 +116,10 @@ function displayBook() {
         p1.textContent = element.getBook();
         deleteButton.onclick = (e) => {
             e.preventDefault();
-            e.target.style.backgroundColor = "red";
-            myLibrary.splice(i, 1);
-            displayBook();
+            favDialog.showModal();
+            confirmBtn.value = i
         }
+        
         buttonToggle.onclick = function name() {
             element.toggleRead();
             buttonToggle.textContent = element.reads ? "read" : "not Read";
@@ -126,9 +127,17 @@ function displayBook() {
         } 
     });
 }
+confirmBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    myLibrary.splice(confirmBtn.value, 1);
+    favDialog.close()
+    displayBook()
+})
 addButton.addEventListener("click", (e) => {
     e.preventDefault();
-    addBookForm.className = "add-book-form-hide"
+    addBookForm.style.display = addBookForm.style.display === "flex" ? "" : "flex";
+    resetFunction()
+
 })
 addBook.addEventListener("click", (e) => {
     e.preventDefault();
@@ -139,10 +148,14 @@ addBook.addEventListener("click", (e) => {
     console.log("bool ",booleen);
     console.log(notRead.value);
     addBookToLibrary(name, author, pages, booleen);
-    //console.log(myLibrary);
-    e.target.style.backgroundColor = "red"
-    displayBook()
+    e.target.style.backgroundColor = "red";
+    displayBook();
 
+})
+stopAddBook.addEventListener("click", (e) => {
+    e.preventDefault();
+    addBookForm.style.display = ""
+    resetFunction();
 })
 
 displayBook();

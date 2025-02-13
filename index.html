@@ -13,24 +13,31 @@
     </nav>
     <div class="book-container">
     </div>
-    <div id="add-book-form" class="add-book-form" >
-        <form action="">
+    <dialog id="favDialog">
+        <form  method="dialog">
+            Are you sure ?
+            <button value="cancel">Annuler</button>
+            <button id="confirmBtn" value="default">Confirmer</button>
+        </form>
+    </dialog>
+    <div id="add-book-form" class="add-book-form" hidden>
+        <form>
             <div>
-                <button class="stop-add-book">
+                <button id="stop-add-book" class="stop-add-book">
                     <iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon>
                 </button>
             </div>
             <label for="name">
-                <span>name</span><input name="name" id="name" type="text">
+                <span>name</span><input name="name" id="name" type="text" required="required"/>
             </label>
             <label for="author">
-                <span>Author</span><input name="author" id="author" type="text">
+                <span>Author</span><input name="author" id="author" type="text" required="required"/>
             </label>
             <label for="pages"><span>Pages</span>
-                <input id="pages" name="pages" type="number">
+                <input id="pages" min="1" name="pages" type="number" required="required"/>
             </label>
             <label for="read"><span>Read Or Not</span>
-                <input name="read" id="read" value="true" type="radio" >Read
+                <input name="read" id="read" value="true" type="radio" required="required"/>Read
                 <input type="radio" id="notRead" value="" name="read">Not Read
             </label>
             <label for="add-book">

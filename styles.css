@@ -52,7 +52,6 @@ nav button:hover {
 /* style Add book form */
 
 .add-book-form  {
-    display: flex;
     flex-direction: column;
     position: fixed;
     top: 25%;
