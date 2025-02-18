@@ -1,44 +1,47 @@
 const myLibrary = [
     {
-        name: "Titanic",
-        author: "Cameroon",
-        pages: 135,
+        name: "The Romance of the Three Kingdoms",
+        author: "Luo Guanzhong",
+        pages: 2500,
+        reads: true,
+        getBook: function() {
+            return `<p id="name-book">${this.name}</p><p id="author-name">By <span>${this.author}</span></p><p id="number-pages">${this.pages} pages</p><p id="read-state">${this.reads ? "read" : "not read"}</p>`
+        },
+        toggleRead: function() {
+            this.reads = !this.reads
+        }
+    },
+    {
+        name: "Water Margin",
+        author: "Shi Nai'an or Luo Guanzhong",
+        pages: 2500,
         reads: false,
         getBook: function() {
-            return `<div class="card">
-            <button id="delete-book" class="delete-book"><iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon></button>
-                <p>${this.name}</p><p>${this.author}</p><p>${this.pages} pages</p><p>${this.read ? "read" : "not read"}</p>
-            </div>`
+            return `<p id="name-book">${this.name}</p><p id="author-name">By <span>${this.author}</span></p><p id="number-pages">${this.pages} pages</p><p id="read-state">${this.reads ? "read" : "not read"}</p>`
         },
         toggleRead: function() {
             this.reads = !this.reads
         }
     },
     {
-        name: "Conte Monte Christo",
-        author: "Alexandre Dumas",
-        pages: 135,
-        reads: true,
+        name: "Journey to the West",
+        author: "Wu Cheng'en",
+        pages: 2400,
+        reads: false,
         getBook: function() {
-            return `<div class="card">
-            <button id="delete-book" class="delete-book"><iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon></button>
-                <p>${this.name}</p><p>${this.author}</p><p>${this.pages} pages</p><p>${this.reads ? "read" : "not read"}</p>
-            </div>`
+            return `<p id="name-book">${this.name}</p><p id="author-name">By <span>${this.author}</span></p><p id="number-pages">${this.pages} pages</p><p id="read-state">${this.reads ? "read" : "not read"}</p>`
         },
         toggleRead: function() {
             this.reads = !this.reads
         }
     },
     {
-        name: "Monte Christo",
-        author: "Alexandre Dumas",
-        pages: 135,
-        reads: true,
+        name: "Jin Ping Mei",
+        author: "Lanling Xiaoxiao Sheng ('The Scoffing Scholar of Lanling', pseudonym)",
+        pages: 3000,
+        reads: false,
         getBook: function() {
-            return `<div class="card">
-            <button id="delete-book" class="delete-book"><iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon></button>
-                <p>${this.name}</p><p>${this.author}</p><p>${this.pages} pages</p><p>${this.read ? "read" : "not read"}</p>
-            </div>`
+            return `<p id="name-book">${this.name}</p><p id="author-name">By <span>${this.author}</span></p><p id="number-pages">${this.pages} pages</p><p id="read-state">${this.reads ? "read" : "not read"}</p>`
         },
         toggleRead: function() {
             this.reads = !this.reads
@@ -55,7 +58,6 @@ const nameAuthor = document.getElementById("author");
 const namepages = document.getElementById("pages");
 const read = document.getElementById("read");
 const notRead = document.getElementById("notRead");
-//const deleteBook = document.querySelectorAll(".delete-book");
 const favDialog = document.getElementById("favDialog");
 const confirmBtn = favDialog.querySelector("#confirmBtn");
 const stopAddBook =  document.getElementById("stop-add-book");
@@ -68,16 +70,12 @@ function Book(name, author, pages, booleen) {
     this.reads = booleen;
     this.getBook = function() {
         console.log("in Book",this.reads, this.author)
-        return `<div class="card">
-        <button id="delete-book" class="delete-book"><iconify-icon icon="material-symbols:close" width="24" height="24"  style="color: red"></iconify-icon></button>
-            <p>${this.name}</p><p>${this.author}</p><p>${this.pages} pages</p><p>${(this.reads ? "reads" : "not read")}</p>
-        </div>`
+        return `<p id="name-book">${this.name}</p><p id="author-name">By <span>${this.author}</span></p><p id="number-pages">${this.pages} pages</p><p id="read-state">${this.reads ? "read" : "not read"}</p>`
     }
 }
 
 Book.prototype.toggleRead = function() {
     this.reads = !this.reads;
-    
 }
 
 const resetFunction = () => {
@@ -94,13 +92,13 @@ function addBookToLibrary(name, author, pages, booleen) {
 } 
 
 function displayBook() {
-    //const bookInformation = myLibrary.map(el => el.getBook()).join("");
-    //bookContainer.innerHTML = bookInformation;
     bookContainer.textContent = ""
     myLibrary.forEach((element, i) => {
         const card = document.createElement("div");
         const deleteButton = document.createElement("button");
         const buttonToggle = document.createElement("button");
+        deleteButton.setAttribute("id", "delete-book");
+        buttonToggle.setAttribute("id", "button-toggle")
         buttonToggle.textContent = element.reads ? "read" : "not Read";
         buttonToggle.style.backgroundColor = element.reads ? "green" : "red";
         card.appendChild(deleteButton);
@@ -110,10 +108,10 @@ function displayBook() {
         deleteButton.innerHTML = '<iconify-icon icon="material-symbols:close" style="margin: 0; border: 0;" width="24" height="24"  style="color: red"></iconify-icon>'
         card.classList.add("card");
         bookContainer.appendChild(card);
-        const p1 = document.createElement("p");
+        let p1 = document.createElement("p");
         card.appendChild(p1);
         card.appendChild(buttonToggle);
-        p1.textContent = element.getBook();
+        p1.innerHTML = element.getBook();
         deleteButton.onclick = (e) => {
             e.preventDefault();
             favDialog.showModal();
@@ -124,6 +122,7 @@ function displayBook() {
             element.toggleRead();
             buttonToggle.textContent = element.reads ? "read" : "not Read";
             buttonToggle.style.backgroundColor = element.reads ? "green" : "red";
+            p1.innerHTML = element.getBook();
         } 
     });
 }
@@ -133,14 +132,16 @@ confirmBtn.addEventListener("click", (e) => {
     favDialog.close()
     displayBook()
 })
+
 addButton.addEventListener("click", (e) => {
     e.preventDefault();
     addBookForm.style.display = addBookForm.style.display === "flex" ? "" : "flex";
     resetFunction()
 
 })
+
 addBook.addEventListener("click", (e) => {
-    e.preventDefault();
+    if (nameBook.value === "" || nameAuthor.value === "" || namepages.value === "" || (read.checked === false && notRead.checked ===false)) return
     const name = nameBook.value;
     const author = nameAuthor.value;
     const pages = namepages.value;
@@ -150,7 +151,8 @@ addBook.addEventListener("click", (e) => {
     addBookToLibrary(name, author, pages, booleen);
     e.target.style.backgroundColor = "red";
     displayBook();
-
+    resetFunction();
+    e.preventDefault();
 })
 stopAddBook.addEventListener("click", (e) => {
     e.preventDefault();
