@@ -63,20 +63,22 @@ const confirmBtn = favDialog.querySelector("#confirmBtn");
 const stopAddBook =  document.getElementById("stop-add-book");
 
 
-function Book(name, author, pages, booleen) {
-    this.name = name;
-    this.author = author;
-    this.pages = pages;
-    this.reads = booleen;
-    this.getBook = function() {
-        console.log("in Book",this.reads, this.author)
-        return `<p id="name-book">${this.name}</p><p id="author-name">By <span>${this.author}</span></p><p id="number-pages">${this.pages} pages</p><p id="read-state">${this.reads ? "read" : "not read"}</p>`
+class Book {
+    constructor(name, author, pages, booleen) {
+        this.name = name;
+        this.author = author;
+        this.pages = pages;
+        this.reads = booleen;
+        this.getBook = function () {
+            console.log("in Book", this.reads, this.author);
+            return `<p id="name-book">${this.name}</p><p id="author-name">By <span>${this.author}</span></p><p id="number-pages">${this.pages} pages</p><p id="read-state">${this.reads ? "read" : "not read"}</p>`;
+        };
+    }
+    toggleRead() {
+        this.reads = !this.reads;
     }
 }
 
-Book.prototype.toggleRead = function() {
-    this.reads = !this.reads;
-}
 
 const resetFunction = () => {
     nameBook.value = "";
