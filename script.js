@@ -143,7 +143,10 @@ addButton.addEventListener("click", (e) => {
 })
 
 addBook.addEventListener("click", (e) => {
-    if (nameBook.value === "" || nameAuthor.value === "" || namepages.value === "" || (read.checked === false && notRead.checked ===false)) return
+    if (!document.getElementById("form-add").checkValidity()) {
+        document.getElementById("form-add").reportValidity();
+        return
+    }
     const name = nameBook.value;
     const author = nameAuthor.value;
     const pages = namepages.value;
